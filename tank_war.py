@@ -184,7 +184,7 @@ class TankWar:
     def run_game(self):
         self.__init_game()
         self.__create_sprite()
-        while True and self.hero.is_alive and self.game_still:
+        while True and self.hero.is_alive and self.game_still and (len(self.enemies)>0):
             self.screen.fill(Settings.SCREEN_COLOR)
             # 1、设置刷新帧率
             self.clock.tick(Settings.FPS)
@@ -196,9 +196,40 @@ class TankWar:
             self.__update_sprites()
             # 5、更新显示
             pygame.display.update()
-        self.__game_over()
+        if not self.enemies:
+            self.__game_over(won=True)
+        else:
+            self.__game_over()
 
     @staticmethod
-    def __game_over():
-        pygame.quit()
-        exit()
+    def __game_over(won=False):
+        font = pygame.font.SysFont("Arial", 48)
+        screen = pygame.display.get_surface()
+        screen.fill((0, 0, 0))  # Black background
+
+        # Show win/lose message
+        if won:
+            text = font.render("YOU WIN!", True, (0, 255, 0))
+        else:
+            text = font.render("GAME OVER!", True, (255, 0, 0))
+
+        tip = pygame.font.SysFont("Arial", 24).render("Press R to Restart or Q to Quit", True, (255, 255, 255))
+
+        screen.blit(text, (Settings.SCREEN_RECT.width // 2 - text.get_width() // 2, 200))
+        screen.blit(tip, (Settings.SCREEN_RECT.width // 2 - tip.get_width() // 2, 300))
+        pygame.display.flip()
+
+        # Wait for user input
+        waiting = True
+        while waiting:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        TankWar().run_game()
+                        waiting = False
+                    elif event.key == pygame.K_q:
+                        pygame.quit()
+                        exit()

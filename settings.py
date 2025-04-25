@@ -75,6 +75,7 @@ class Settings:
     RED_WALL = 1
     IRON_WALL = 2
     WEED_WALL = 3
+    SEA_WALL = 4
     BOSS_WALL = 5
     WALLS = [
         f"resources/images/walls/{file}" for file in os.listdir("resources/images/walls/")
