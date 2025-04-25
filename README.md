@@ -1,3 +1,98 @@
+# Tank Battle Game in Python
+
+## 1. Project Overview
+
+### 1.1 Project Screenshots
+
+The main entry point is the `main.py` file. After installing the Pygame module, you can run the game directly.  
+Here are some screenshots:
+
+- Game running:
+
+  ![Insert image description here](https://img-blog.csdnimg.cn/2020101616513476.png#pic_center)
+
+- Bullet explosion effect when hitting a wall:
+
+  ![Insert image description here](https://img-blog.csdnimg.cn/20201016165930603.png#pic_center)
+
+- Multiple enemy tanks:
+
+  ![Insert image description here](https://img-blog.csdnimg.cn/20201016170337190.png#pic_center)
+
+Now, let’s walk through the project structure.
+
+### 3.2 Project Files
+
+Here’s the project directory:
+
+![Insert image description here](https://img-blog.csdnimg.cn/20201016165018353.png#pic_center)
+
+#### (1) `resources` Folder
+
+The `resources` folder contains assets like **audio** and **images**.  
+The `tools` folder provides two small utilities, mainly for my personal use, so I won’t explain them in detail here.
+
+#### (2) `main.py`
+
+`main.py` is the main program entry point. The code is very short:
+
+```python
+from tank_war import TankWar
+
+if __name__ == '__main__':
+    tankWar = TankWar()
+    tankWar.run_game()
+```
+
+We simply create an instance of `TankWar` and call its `run_game` method to start the game.
+
+#### (3) `tank_war.py`
+
+`tank_war.py` contains the core logic of the Tank Battle game.  
+The `TankWar` class defines all main game behaviors, including:
+- Initializing the screen
+- Initializing Pygame
+- Creating enemy tanks
+- Drawing the map
+- Detecting collisions
+- Listening for player input/events
+
+#### (4) `sprites.py`
+
+Pygame provides a `Sprite` class for creating image-based game objects.  
+`sprites.py` defines multiple subclasses of `Sprite`, such as:
+- Tank base class
+- Hero class (player's tank)
+- Enemy class (enemy tanks)
+- Bullet class
+- Wall class
+
+Each class defines specific behaviors. For example:
+- Tanks can **move**, **shoot bullets**, and **explode**.
+
+#### (5) `settings.py`
+
+`settings.py` contains configuration parameters such as:
+- Number of bullets
+- Bullet speed
+- Tank speed
+- Map information
+- Image assets
+
+You can adjust these settings by modifying the source code directly (since no settings UI has been implemented yet).
+
+Because the project has a lot of code, I won’t go into the full details here.  
+The game still has areas for improvement, and I plan to continue updating it.  
+The project is available on GitHub — feel free to **fork** it!
+
+That's all for today!
+
+---
+
+**Project GitHub Repository:** [https://github.com/IronSpiderMan/TankWar](https://github.com/IronSpiderMan/TankWar)  
+**Pygame Documentation:** [https://www.pygame.org/docs/](https://www.pygame.org/docs/)
+
+
 # Python实现坦克大战
 
 ## 一、前言
